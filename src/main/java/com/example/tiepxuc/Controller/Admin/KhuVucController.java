@@ -1,6 +1,8 @@
 package com.example.tiepxuc.Controller.Admin;
 
+import com.example.tiepxuc.Model.Diadiem;
 import com.example.tiepxuc.Model.Khuvuc;
+import com.example.tiepxuc.Repository.DiaDiemReposito;
 import com.example.tiepxuc.Repository.KhuVucReposito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,8 @@ public class KhuVucController {
     @Autowired
     KhuVucReposito khuVucReposito;
 
-
+    @Autowired
+    DiaDiemReposito diaDiemReposito;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public Iterable<Khuvuc> GetAll(){
@@ -42,6 +45,14 @@ public class KhuVucController {
         Khuvuc old = khuVucReposito.findByIdkhuvuc(id);
         khuVucReposito.delete(old);
         return old;
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.POST)
+    public Diadiem PostDiadiem(@RequestBody Diadiem diadiem,@PathVariable int id){
+        Khuvuc old = khuVucReposito.findByIdkhuvuc(id);
+        diadiem.setKhuvuc(old);
+        diaDiemReposito.save(diadiem);
+        return diadiem;
     }
 
 }
