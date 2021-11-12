@@ -7,12 +7,14 @@ import com.example.tiepxuc.Model.JwtResponse;
 import com.example.tiepxuc.Model.User;
 import com.example.tiepxuc.Repository.UserReposito;
 import com.example.tiepxuc.Service.JwtUserDetailsService;
+import com.example.tiepxuc.function.findUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,6 +49,7 @@ public class JwtAuthenticationController {
     @RequestMapping(value = "/dangki", method = RequestMethod.POST)
     public User createUser(@RequestBody User user) {
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
+        user.setRole("user");
         userDao.save(user);
         return user;
     }
@@ -73,5 +76,10 @@ public class JwtAuthenticationController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+
+    @RequestMapping(value = "/info",method = RequestMethod.GET)
+    public Object getuser(){
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 }

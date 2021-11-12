@@ -4,6 +4,7 @@ package com.example.tiepxuc.Service;
 import com.example.tiepxuc.Model.User;
 import com.example.tiepxuc.Repository.UserReposito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,7 +25,17 @@ public class JwtUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("Dang Nhap that bai" + username);
         } else {
-            return new org.springframework.security.core.userdetails.User(user.get(0).getEmail(), user.get(0).getPassword(), new ArrayList<>());
+//            ArrayList<String> list = new ArrayList<>();
+//            list.add("ADMIN");
+
+
+            List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+//            for (String role : list) {
+//                authorities.add(new SimpleGrantedAuthority(role));
+//            }
+            authorities.add(new SimpleGrantedAuthority(user.get(0).getRole()));
+            return new org.springframework.security.core.userdetails.User(user.get(0).getEmail(), user.get(0).getPassword(),authorities);
         }
     }
 }
