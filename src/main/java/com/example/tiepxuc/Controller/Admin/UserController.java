@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/user")
 public class UserController {
+
     @Autowired
     UserReposito userReposito;
 
@@ -26,6 +27,11 @@ public class UserController {
         return (List<User>) userReposito.findAll();
     }
 
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public User GetUserByID(@PathVariable int id){
+        return  userReposito.findByIduser(id);
+    }
 
     @RequestMapping(value = "",method = RequestMethod.POST)
     public User PostUser(@RequestBody User user){

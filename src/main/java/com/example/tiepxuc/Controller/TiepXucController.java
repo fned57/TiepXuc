@@ -4,8 +4,7 @@ package com.example.tiepxuc.Controller;
 import com.example.tiepxuc.Model.Diadiem;
 import com.example.tiepxuc.Model.Tiepxuc;
 import com.example.tiepxuc.Repository.TiepXucReposito;
-import com.example.tiepxuc.Repository.UserReposito;
-import com.example.tiepxuc.function.findUser;
+import com.example.tiepxuc.function.find;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +35,7 @@ public class TiepXucController {
     public Tiepxuc PostTiepXuc(@RequestBody Diadiem diadiem){
 
         Tiepxuc tiepxuc = new Tiepxuc();
-        tiepxuc.setUser(new findUser().findUser());
+        tiepxuc.setUser(new find().findUser());
         tiepxuc.setDiadiem(diadiem);
         tiepxuc.setThoigian(new Date());
         tiepXucReposito.save(tiepxuc);

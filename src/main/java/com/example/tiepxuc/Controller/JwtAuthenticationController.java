@@ -7,7 +7,7 @@ import com.example.tiepxuc.Model.JwtResponse;
 import com.example.tiepxuc.Model.User;
 import com.example.tiepxuc.Repository.UserReposito;
 import com.example.tiepxuc.Service.JwtUserDetailsService;
-import com.example.tiepxuc.function.findUser;
+import com.example.tiepxuc.function.find;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -46,6 +46,9 @@ public class JwtAuthenticationController {
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
+    @Autowired
+    UserReposito userReposito;
+
     @RequestMapping(value = "/dangki", method = RequestMethod.POST)
     public User createUser(@RequestBody User user) {
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
@@ -79,7 +82,24 @@ public class JwtAuthenticationController {
     }
 
     @RequestMapping(value = "/info",method = RequestMethod.GET)
-    public Object getuser(){
-        return SecurityContextHolder.getContext().getAuthentication();
+    public User getuser(){
+        return findUser();
+    }
+
+    public User findUser(){
+        String userName = null;
+        String pass = null;
+        User user = null;
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+            pass = ((UserDetails)principal).getPassword();
+            user = userReposito.findByEmailAndPassword(userName,pass);
+        } else {
+            return null;
+        }
+        return user;
     }
 }
