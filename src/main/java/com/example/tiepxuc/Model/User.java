@@ -2,13 +2,17 @@ package com.example.tiepxuc.Model;
 
 
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
+import java.util.Collection;
+
 @Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Iduser;
+    private Long Iduser;
 
     private String Name;
 
@@ -18,15 +22,19 @@ public class User {
 
     private  String Phone;
 
-    private  String Avt;
+    @Lob
+    private byte[] avt;
 
     private String Role;
 
-    public Integer getIduser() {
+
+
+
+    public Long getIduser() {
         return Iduser;
     }
 
-    public void setIduser(Integer iduser) {
+    public void setIduser(Long iduser) {
         Iduser = iduser;
     }
 
@@ -62,12 +70,12 @@ public class User {
         Phone = phone;
     }
 
-    public String getAvt() {
-        return Avt;
+    public byte[] getAvt() {
+        return avt;
     }
 
-    public void setAvt(String avt) {
-        Avt = avt;
+    public void setAvt(byte[] avt) {
+        this.avt = avt;
     }
 
     public String getRole() {

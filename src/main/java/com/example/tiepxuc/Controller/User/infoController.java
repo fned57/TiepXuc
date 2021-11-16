@@ -3,20 +3,15 @@ package com.example.tiepxuc.Controller.User;
 
 import com.example.tiepxuc.Model.User;
 import com.example.tiepxuc.Repository.UserReposito;
-import com.example.tiepxuc.function.find;
+import com.example.tiepxuc.dto.MyUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Path;
 
 @Controller
 @RestController
@@ -26,39 +21,52 @@ public class infoController {
     @Autowired
     UserReposito userReposito;
 
-    @Autowired
-    ServletContext servletContext;
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public User info(){
-        return new find().findUser();
+    public User info( ){
+
+        return userReposito.findByIduser(findId());
+
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public User Putinfo(@RequestBody User user){
-        User old = new find().findUser();
-        user.setRole("USER");
-        user.setIduser(old.getIduser());
+        User usernew = userReposito.findByIduser(findId());
+        user.setIduser(findId());
+        user.setEmail(usernew.getEmail());
+        user.setPassword(usernew.getPassword());
+        user.setRole(usernew.getRole());
         userReposito.save(user);
         return user;
     }
 
     @RequestMapping(value = "/avt", method = RequestMethod.PUT)
-    public String Putinfos(@RequestBody MultipartFile file){
-        if(!file.isEmpty()){
-            String part = servletContext.getRealPath("/");
-            return part;
-//            try {
-//                file.transferTo(Path.of(part + "/image/"+file.getOriginalFilename()));
-//                return file;
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return null;
-//            }
-        }else
-            return null;
+    public String Putavtuser(@RequestBody MultipartFile file){
 
+        if(!file.isEmpty()){
+            try {
+                User user = userReposito.findByIduser(findId());;
+                user.setAvt(file.getBytes());
+                userReposito.save(user);
+                return "Thên ảnh thành công";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Thêm ảnh thất bại";
+            }
+        }else
+            return "Thêm ảnh thất bại";
+
+    }
+
+    private Long findId(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long id=null;
+        if (principal instanceof MyUser) {
+            String username = ((MyUser)principal).getUsername();
+            id = ((MyUser)principal).getId();
+        }
+        return id;
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.tiepxuc.Service;
 
 import com.example.tiepxuc.Model.User;
 import com.example.tiepxuc.Repository.UserReposito;
+import com.example.tiepxuc.dto.MyUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,7 +36,10 @@ public class JwtUserDetailsService implements UserDetailsService {
 //                authorities.add(new SimpleGrantedAuthority(role));
 //            }
             authorities.add(new SimpleGrantedAuthority(user.get(0).getRole()));
-            return new org.springframework.security.core.userdetails.User(user.get(0).getEmail(), user.get(0).getPassword(),authorities);
+//            return new org.springframework.security.core.userdetails.User(user.get(0).getEmail(), user.get(0).getPassword(),authorities);
+            MyUser user1  =new  MyUser(user.get(0).getEmail(), user.get(0).getPassword(),authorities);
+            user1.setId(user.get(0).getIduser());
+            return user1;
         }
     }
 }

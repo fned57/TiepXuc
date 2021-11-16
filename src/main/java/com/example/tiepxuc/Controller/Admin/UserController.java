@@ -29,7 +29,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public User GetUserByID(@PathVariable int id){
+    public User GetUserByID(@PathVariable Long id){
         return  userReposito.findByIduser(id);
     }
 
@@ -40,15 +40,9 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
-    public User PutUser(@RequestBody User user, @PathVariable int id){
-        user.setIduser(id);
-        userReposito.save(user);
-        return user;
-    }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    public User DeleteUser(@PathVariable int id){
+    public User DeleteUser(@PathVariable Long id){
         User old = userReposito.findByIduser(id);
         userReposito.delete(old);
         return old;
