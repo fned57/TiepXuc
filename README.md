@@ -16,12 +16,17 @@
                     "error": "Unauthorized",
                     "path": "/login"
                 }
+                
+                
 #Logout
+
     Domain: localhost:81/logout
 
 
 
 #Đăng Kí User
+
+
     Domain: localhost:81/dangki
         method : POST
         Request:{
@@ -42,6 +47,8 @@
 
 
 #User
+
+
     Domain: localhost:81/user
         method : Get
         Request Headers:{
