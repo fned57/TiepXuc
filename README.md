@@ -47,8 +47,7 @@
            "Authorization" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkIiwiZXhwIjoxNjM3MDcxOTY1LCJpYXQiOjE2MzcwNTM5NjV9.rHBCyHC6SDafYd4VjiW2p0YspN8wX9vJ2viQRxh5N55XRnfzjM7GlyMQB3BIof8b_fm1iV99vXkcZLevxZyk-w"
        }
        Response:
-            True:
-                {
+            True:{
                     "avt": null,
                     "name": "Tuan",
                     "password": "$2a$10$3tG56yvLSH5YHkqYhONKQuKlqE1razN9M7dcpu6CvY8fSb3aQhkba",
