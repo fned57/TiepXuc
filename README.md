@@ -1,4 +1,4 @@
-#Login
+# Login
 
     Domain: localhost:81/login
         Request:{
@@ -18,13 +18,13 @@
                 }
                 
                 
-#Logout
+# Logout
 
     Domain: localhost:81/logout
 
 
 
-#Đăng Kí User
+# Đăng Kí User
 
 
     Domain: localhost:81/dangki
@@ -46,7 +46,7 @@
         
 
 
-#User
+# User
 
     Domain: localhost:81/user
 
