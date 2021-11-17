@@ -1,7 +1,5 @@
 # Login
-
-   Domain: localhost:81/login
-    
+   **Domain: localhost:81/login**
         Request:{
                     "username" : "username",
                     "password" : "password"
@@ -20,15 +18,9 @@
                 
                 
 # Logout
-
-    Domain: localhost:81/logout
-
-
-
+    **Domain: localhost:81/logout**
 # Đăng Kí User
-
-
-    Domain: localhost:81/dangki
+    **Domain: localhost:81/dangki**
     
         method : POST
         Request:{
@@ -49,10 +41,7 @@
 
 
 # User
-
-    Domain: localhost:81/user
-
-
+    **Domain: localhost:81/user**
    ## Lấy dữ liệu người dùng
 
         method : Get
