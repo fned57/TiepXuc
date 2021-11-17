@@ -22,25 +22,6 @@ public class Tiepxuc {
 
     private Date thoigian;
 
-//    private Integer Iddiadiem;
-//
-//    private Integer Iduser;
-
-//    public Integer getIddiadiem() {
-//        return Iddiadiem;
-//    }
-//
-//    public void setIddiadiem(Integer iddiadiem) {
-//        Iddiadiem = iddiadiem;
-//    }
-//
-//    public Integer getIduser() {
-//        return Iduser;
-//    }
-//
-//    public void setIduser(Integer iduser) {
-//        Iduser = iduser;
-//    }
 
     public Integer getId() {
         return id;

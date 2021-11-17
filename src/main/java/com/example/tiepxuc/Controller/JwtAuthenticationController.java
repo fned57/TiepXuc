@@ -17,11 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /*
 Expose a POST API /authenticate using the JwtAuthenticationController. The POST API gets username and password in the
@@ -50,11 +46,16 @@ public class JwtAuthenticationController {
     UserReposito userReposito;
 
     @RequestMapping(value = "/dangki", method = RequestMethod.POST)
-    public User createUser(@RequestBody User user) {
-        user.setPassword(bcryptEncoder.encode(user.getPassword()));
-        user.setRole("user");
-        userDao.save(user);
-        return user;
+    public  String createUser(@RequestBody User user) {
+        if(user.getPassword()==null || user.getEmail() == null){
+            return "Đăng kí thất bại";
+        }else{
+            user.setPassword(bcryptEncoder.encode(user.getPassword()));
+            user.setRole("USER");
+            userDao.save(user);
+            return "Đăng kí thành công";
+        }
+
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
