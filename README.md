@@ -1,6 +1,6 @@
 # Login
 
-    ** Domain: localhost:81/login **
+   Domain: localhost:81/login
     
         Request:{
                     "username" : "username",
@@ -21,14 +21,15 @@
                 
 # Logout
 
-    ## Domain: localhost:81/logout
+    Domain: localhost:81/logout
 
 
 
 # Đăng Kí User
 
 
-    ## Domain: localhost:81/dangki
+    Domain: localhost:81/dangki
+    
         method : POST
         Request:{
                     "name": "Tuan",
@@ -49,9 +50,10 @@
 
 # User
 
-    ## Domain: localhost:81/user
+    Domain: localhost:81/user
 
-            ### Lấy dữ liệu người dùng
+
+   ## Lấy dữ liệu người dùng
 
         method : Get
 
@@ -79,7 +81,7 @@
                     "path": "/user"
                     }
 
-    ###Sử dữ liệu người dùng
+   ## Sửa dữ liệu người dùng
 
             method : PUT
 
@@ -113,7 +115,7 @@
                         "path": "/user"
                         }
         
-    ### Thay doi avt
+  ## Thay doi avt
 
         Domain: localhost:81/user/avt
 
@@ -136,7 +138,7 @@
                         Thêm ảnh thất bại
                         }
 
-    ### Xem lịch sử tiếp xúc
+  ##  Xem lịch sử tiếp xúc
 
         Domain: localhost:81/user/tiepxuc
 
@@ -158,7 +160,7 @@
                     }
                 ]
                 
-    ### Thêm lịch sử tiếp xúc
+   ## Thêm lịch sử tiếp xúc
     
     
         Domain: localhost:81/user/tiepxuc
